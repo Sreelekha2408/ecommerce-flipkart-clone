@@ -3,10 +3,17 @@ import '../Styles/Header.css'
 import * as UI from 'react-bootstrap'
 import {LoginModalPopUp} from './LoginModalPopUp'
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 export const Header = () => {
+    const count=useSelector(state=>state.products.count)
+    const navigate=useNavigate()
     const [showPopUp,setShowPopUp]=useState(false)
     function hideFunction(){
         setShowPopUp(false)
+    }
+    function goToCart(){
+        navigate('/cart')
     }
     return (
         <>
@@ -100,7 +107,9 @@ export const Header = () => {
                         </UI.Row>
                     </UI.Col>
                     <UI.Col xs={12} sm={12} md={12} xl={2} lg={2} xxl={2} style={{ marginTop: "9px", marginBottom: "7px" }}>
-                              &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <span style={{ color: "white" }}><b>Cart</b></span>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 
+                              <span style={{ color: "white" ,cursor: "pointer" }} 
+                              onClick={()=>goToCart()}><b>Cart&nbsp;({count!=0?count:localStorage.getItem('noOfProducts')})</b></span>
                     </UI.Col>
                 </UI.Row>
             </UI.Container>

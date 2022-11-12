@@ -1,14 +1,33 @@
 import { Modal } from "react-bootstrap"
 import * as UI from 'react-bootstrap'
 import '../Styles/Modal.css'
+import { useState } from "react"
+import Swal from "sweetalert2"
 export const LoginModalPopUp = (props) => {
+    const [username,setUsername]=useState('')
+    const [password,setPassword]=useState('')
+    function LoginFunction(){
+        if(username!=='9879812345' || password!=='admin@123'){
+            Swal.fire({icon:"warning",text:"Invalid Username/Password"}).then(function(){
+                setUsername('')
+                setPassword('')
+            })
+        }
+        else{
+            localStorage.setItem('username','admin')
+            Swal.fire({icon:"success",text:"LoggedIn Successfully"}).then(function(){
+                props.hide()
+            })
+        }
+    }
     return (
         <>
             <Modal show={props.show} onHide={props.hide} size={'lg'} centered>
-                <div className="closeButton" onClick={props.hide}>
+                {/* <div className="closeButton" onClick={props.hide}>
                     <UI.CloseButton style={{ fontSize: "25px" }} />
-                </div>
-                <Modal.Body>
+                </div> */}
+                {/* <Modal.Body> */}
+                {/* <UI.CloseButton style={{ fontSize: "25px" }} /> */}
                     <div className="modalL">
                         <div className="modalL__left">
                             <div className="modalLLeft__top">
@@ -23,21 +42,27 @@ export const LoginModalPopUp = (props) => {
                                         <input
                                             type="text"
                                             required
+                                            value={username}
+                                            placeholder="Enter Email/Mobile Number"
+                                            onChange={(e)=>setUsername(e.target.value)}
                                         />
                                         <div className="underline"></div>
-                                        <label>Enter Email/Mobile number</label>
+                                        {/* <label>Enter Email/Mobile number</label> */}
                                     </div>
                                     <div className="input__data">
                                         <input
-                                            type="text"
+                                            type="password"
                                             required
+                                            value={password}
+                                            onChange={(e)=>setPassword(e.target.value)}
+                                            placeholder="Enter Password"
                                         />
                                         <div className="underline"></div>
-                                        <label>Enter Password</label>
+                                        {/* <label>Enter Password</label> */}
                                     </div>
                                 </div>
                                 <div className="form__button">
-                                    <button
+                                    <button onClick={()=>LoginFunction()}
                                         style={{ cursor: "pointer" }}
                                     >
                                         Login
@@ -52,7 +77,7 @@ export const LoginModalPopUp = (props) => {
                             </div>
                         </div>
                     </div>
-                </Modal.Body>
+                {/* </Modal.Body> */}
             </Modal>
         </>
     )

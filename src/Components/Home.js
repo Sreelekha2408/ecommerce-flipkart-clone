@@ -54,7 +54,7 @@ export const Home = () => {
         localStorage.removeItem('productId')
         localStorage.setItem('productId',item.id)
         window.open('http://localhost:3000/productPage', '_blank', 'noopener,noreferrer');
-    }
+    }  
     return (
         <>
             <Header></Header>
@@ -101,7 +101,9 @@ export const Home = () => {
                                         <UI.Card.Subtitle className="mb-2 text-muted">{item.category}</UI.Card.Subtitle>
                                         <UI.Card.Text>
                                         </UI.Card.Text>
-                                        <button type="button" className="btn btn-success btn-sm">{item?.rating?.rate}<AiFillStar /></button> (<span>{item?.rating?.count}</span>)&nbsp;<img src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/fa_62673a.png" height={30} width={100}></img>
+                                        <button type="button" className="btn btn-success btn-sm">{item?.rating?.rate}<AiFillStar /></button>
+                                         (<span>{item?.rating?.count}</span>)&nbsp;<img src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/fa_62673a.png" 
+                                         height={30} width={100}></img>
                                         <br></br><BiRupee size={22} /><span style={{ fontSize: "20px" }}><b>{item.price}</b></span>
                                     </UI.Card.Body>
                                 </UI.Card>
